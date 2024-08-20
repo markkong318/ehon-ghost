@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "book": {
+    "backgroundColor": "0xffffff",
+    "fontColor": " 0x9DCCE0",
+    "cover": {
+      "title": "夏祭り",
+      "voice": "voice_0"
+    },
+    "pages": [
+      {
+        "article": {
+          "sentences": [
+            {
+              "text": "今日は待ちに待った夏祭り！今日は待ちに待った夏祭り！今日は待ちに待った夏祭り！今日は待ちに待った夏祭り！",
+              "voice": "voice_1_1"
+            },
+            {
+              "text": "色とりどりの浴衣を着た子どもたちが",
+              "voice": "voice_1_2"
+            },
+            {
+              "text": "笑顔いっぱいで会場に向かいます。",
+              "voice": "voice_1_3"
+            }
+          ]
+        },
+        "illustration": "illustration1"
+      }
+    ],
+    "voiceEnd": "voice_end"
+  }
+}

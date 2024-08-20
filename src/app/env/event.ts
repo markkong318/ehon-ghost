@@ -1,0 +1,1 @@
+export const EVENT_NEXT_PAGE = 'EVENT_NEXT_PAGE';
