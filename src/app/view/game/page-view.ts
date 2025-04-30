@@ -57,12 +57,13 @@ export class PageView extends View {
     this.addChild(illustration);
 
     this.articleView = new ArticleView(articleModel);
+    this.articleView.setRenderWidth(this.width);
     this.articleView.init();
-    this.articleView.x = 50;
+    this.articleView.x = 0;
     this.articleView.y = 50;
     this.addChild(this.articleView);
 
-    const style = this.textStyle.getWithColor(this.bookModel.fontColor);
+    const style = this.textStyle.applyColor(this.bookModel.fontColor);
     this.nextBtn = new PIXI.Text('次へ', style);
     this.nextBtn.x = this.width - this.nextBtn.width - 50;
     this.nextBtn.y = this.height - this.nextBtn.height - 20;
@@ -86,8 +87,6 @@ export class PageView extends View {
   }
 
   public fadeIn(tl: gsap.core.Timeline) {
-    this.articleView.x = (this.width - this.articleView.getMaxTextWidth()) / 2;
-
     GsapUtil.toFadeIn(tl, this);
   }
 

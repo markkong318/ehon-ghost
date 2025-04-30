@@ -18,7 +18,10 @@ export class SentenceView extends View {
   private textSprite: PIXI.Text;
   private maskSprite: PIXI.Sprite;
 
+  private maskView: View;
+
   private textWidth: number;
+  private renderWidth: number;
 
   constructor(text: string, voice: AudioBuffer) {
     super();
@@ -28,7 +31,9 @@ export class SentenceView extends View {
   }
 
   public init() {
-    const style = this.textStyle.getWithColor(this.bookModel.fontColor);
+    let style = this.textStyle.applyColor(this.bookModel.fontColor);
+
+    style = this.textStyle.applyMultiLine(this.renderWidth, style);
 
     this.textSprite = new PIXI.Text(this.text, style);
 
@@ -38,15 +43,15 @@ export class SentenceView extends View {
     this.maskSprite.x = -MaskSprite.WIDTH;
     this.maskSprite.y = (this.textSprite.height - this.maskSprite.height) / 2;
 
-    this.textSprite.mask = this.maskSprite;
+    // this.textSprite.mask = this.maskSprite;
 
     this.addChild(this.maskSprite)
     this.addChild(this.textSprite);
   }
 
-  public getTextWidth() {
-    return this.textWidth;
-  }
+  // public getTextWidth() {
+  //   return this.textWidth;
+  // }
 
   play(tl: gsap.core.Timeline) {
     GsapUtil.toTextVoice(
@@ -57,4 +62,10 @@ export class SentenceView extends View {
       this.voice,
       this.audioContext);
   }
+
+  setRenderWidth(width: number) {
+    this.renderWidth = width;
+  }
+
+
 }

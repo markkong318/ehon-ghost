@@ -23,13 +23,13 @@ export class CoverView extends View {
 
   public setAssets(title: string) {
 
-    this.title = new PIXI.Text(title, this.textStyle.getWithColor(this.bookModel.fontColor, {fontSize: 70}));
+    this.title = new PIXI.Text(title, this.textStyle.applyColor(this.bookModel.fontColor, {fontSize: 70}));
     this.title.x = (this.width - this.title.width) / 2;
     this.title.y = 180;
     this.title.alpha = 1;
     this.addChild(this.title);
 
-    this.nextBtn = new PIXI.Text('次へ', this.textStyle.getWithColor(this.bookModel.fontColor));
+    this.nextBtn = new PIXI.Text('次へ', this.textStyle.applyColor(this.bookModel.fontColor));
     this.nextBtn.anchor = new PIXI.ObservablePoint(() => {
     }, () => {
     }, 0.5, 0.5);

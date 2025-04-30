@@ -28,12 +28,21 @@ export class TextStyle {
     });
   }
 
-  public getWithColor(color: number, options?: {}): PIXI.TextStyle {
+  public applyColor(color: number, options?: {}): PIXI.TextStyle {
     options = {
       ...options,
       dropShadowColor: color,
       stroke: color,
     };
     return this.get(options);
+  }
+
+  public applyMultiLine(width: number, options?: {}): PIXI.TextStyle {
+    return this.get({
+      ...options,
+      breakWords: true,
+      wordWrap: true,
+      wordWrapWidth: width,
+    });
   }
 }
