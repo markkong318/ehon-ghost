@@ -2,8 +2,8 @@ import * as PIXI from 'pixi.js';
 
 export class MaskSprite {
 
-  public static readonly WIDTH: number = 500;
-  public static readonly HEIGHT: number = 50;
+  public static readonly WIDTH: number = 530;
+  public static readonly HEIGHT: number = 43;
   public static readonly GRADIENT_WIDTH: number = 50;
 
   private sprite: PIXI.Sprite;

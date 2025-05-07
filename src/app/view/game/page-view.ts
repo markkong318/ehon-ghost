@@ -7,14 +7,13 @@ import {BOTTLE_AUDIO_CONTEXT} from '../../env/bottle';
 import {EVENT_NEXT_PAGE} from '../../env/event';
 import {ArticleModel} from '../../model/article-model';
 import {BookModel} from '../../model/book-model';
-import {TextStyle} from '../../style/text-style';
+import { TextStyleBuilder } from '../../style/text-style-builder';
 import {GsapUtil} from '../../util/gsap-util';
 import {ArticleView} from './component/article-view';
 
 export class PageView extends View {
 
   private bookModel: BookModel = bottle.inject(BookModel);
-  private textStyle: TextStyle = bottle.inject(TextStyle);
   private audioContext: AudioContext = bottle.inject(BOTTLE_AUDIO_CONTEXT);
   private articleView: ArticleView;
   private illustration: PIXI.Sprite;
@@ -63,7 +62,7 @@ export class PageView extends View {
     this.articleView.y = 50;
     this.addChild(this.articleView);
 
-    const style = this.textStyle.applyColor(this.bookModel.fontColor);
+    const style = TextStyleBuilder.new().setColor(this.bookModel.fontColor).build();
     this.nextBtn = new PIXI.Text('次へ', style);
     this.nextBtn.x = this.width - this.nextBtn.width - 50;
     this.nextBtn.y = this.height - this.nextBtn.height - 20;

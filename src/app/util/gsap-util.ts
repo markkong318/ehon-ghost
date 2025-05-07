@@ -29,6 +29,31 @@ export namespace GsapUtil {
     });
   }
 
+  export function toTextsVoice(tl: gsap.core.Timeline, objects: DisplayObject[], xs: number[], duration: number, voice: AudioBuffer, audioContext: AudioContext) {
+    const segmentDuration = duration / objects.length;
+
+    console.log('du:' + duration);
+
+    for (let i = 0; i < objects.length; i++) {
+      const object = objects[i];
+      const targetX = xs[i];
+
+      tl.to(
+        object,
+        {
+          x: targetX,
+          duration: segmentDuration,
+          onStart: async function (voice: AudioBuffer, audioContext: AudioContext) {
+            if (i === 0) { // Play audio only for the first object
+              AudioUtil.playAudio(voice, audioContext);
+            }
+          },
+          onStartParams: [voice, audioContext],
+        }
+      );
+    }
+  }
+
   export function toFadeIn(tl: gsap.core.Timeline, object: DisplayObject) {
     tl.to(object, {alpha: 1, duration: 1});
   }

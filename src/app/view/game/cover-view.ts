@@ -6,13 +6,12 @@ import {View} from '../../../framework/view';
 import {BOTTLE_AUDIO_CONTEXT} from '../../env/bottle';
 import {EVENT_NEXT_PAGE} from '../../env/event';
 import {BookModel} from '../../model/book-model';
-import {TextStyle} from '../../style/text-style';
+import {TextStyleBuilder} from '../../style/text-style-builder';
 import {GsapUtil} from '../../util/gsap-util';
 
 export class CoverView extends View {
 
   private bookModel: BookModel = bottle.inject(BookModel);
-  private textStyle: TextStyle = bottle.inject(TextStyle);
   private audioContext: AudioContext = bottle.inject(BOTTLE_AUDIO_CONTEXT);
   private title: PIXI.Text;
   private nextBtn: PIXI.Text;
@@ -23,13 +22,20 @@ export class CoverView extends View {
 
   public setAssets(title: string) {
 
-    this.title = new PIXI.Text(title, this.textStyle.applyColor(this.bookModel.fontColor, {fontSize: 70}));
+    this.title = new PIXI.Text(title,
+      TextStyleBuilder.new()
+        .setColor(this.bookModel.fontColor)
+        .setCustomOptions({fontSize: 70})
+        .build());
     this.title.x = (this.width - this.title.width) / 2;
     this.title.y = 180;
     this.title.alpha = 1;
     this.addChild(this.title);
 
-    this.nextBtn = new PIXI.Text('次へ', this.textStyle.applyColor(this.bookModel.fontColor));
+    this.nextBtn = new PIXI.Text('次へ',
+      TextStyleBuilder.new()
+        .setColor(this.bookModel.fontColor)
+        .build());
     this.nextBtn.anchor = new PIXI.ObservablePoint(() => {
     }, () => {
     }, 0.5, 0.5);
