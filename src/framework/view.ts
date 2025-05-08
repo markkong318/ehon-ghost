@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
+import { Background } from './background';
 
-import {Size} from './size';
-import {Background} from './background';
+import { Size } from './size';
 
 export class View extends PIXI.Container {
   private backgroundSprite: PIXI.Sprite;
@@ -33,7 +33,7 @@ export class View extends PIXI.Container {
   }
 
   init() {
-    console.log("init view")
+    console.log('init view')
   }
 
   initBackground() {

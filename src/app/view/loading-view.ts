@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
-import {Background} from '../../framework/background';
-import {View} from '../../framework/view';
+import { Background } from '../../framework/background';
+import { View } from '../../framework/view';
 
 export class LoadingView extends View {
   public init() {

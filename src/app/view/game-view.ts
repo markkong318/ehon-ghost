@@ -1,13 +1,13 @@
 import * as PIXI from 'pixi.js';
-import {Background} from '../../framework/background';
+import { Background } from '../../framework/background';
 import bottle from '../../framework/bottle';
-import {Size} from '../../framework/size';
+import { Size } from '../../framework/size';
 
-import {View} from '../../framework/view';
-import {BookModel} from '../model/book-model';
-import {CoverView} from './game/cover-view';
-import {PageView} from './game/page-view';
-import {TouchSprite} from './game/touch-sprite';
+import { View } from '../../framework/view';
+import { BookModel } from '../model/book-model';
+import { CoverView } from './game/cover-view';
+import { PageView } from './game/page-view';
+import { TouchSprite } from './game/touch-sprite';
 
 export class GameView extends View {
   private bookModel: BookModel = bottle.inject(BookModel);
@@ -22,7 +22,7 @@ export class GameView extends View {
   public init() {
     this.background = new Background(PIXI.Texture.WHITE, this.bookModel.backgroundColor);
 
-    const height = 700
+    const height = 700;
 
     this.coverView = bottle.singleton(CoverView);
     this.coverView.size = new Size(this.size.width, height);

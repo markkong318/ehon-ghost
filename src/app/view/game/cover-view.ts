@@ -1,13 +1,13 @@
-import {gsap} from 'gsap';
+import { gsap } from 'gsap';
 import * as PIXI from 'pixi.js';
 import bottle from '../../../framework/bottle';
 import rocket from '../../../framework/rocket';
-import {View} from '../../../framework/view';
-import {BOTTLE_AUDIO_CONTEXT} from '../../env/bottle';
-import {EVENT_NEXT_PAGE} from '../../env/event';
-import {BookModel} from '../../model/book-model';
-import {TextStyleBuilder} from '../../style/text-style-builder';
-import {GsapUtil} from '../../util/gsap-util';
+import { View } from '../../../framework/view';
+import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
+import { EVENT_NEXT_PAGE } from '../../env/event';
+import { BookModel } from '../../model/book-model';
+import { TextStyleBuilder } from '../../style/text-style-builder';
+import { GsapUtil } from '../../util/gsap-util';
 
 export class CoverView extends View {
 
@@ -25,7 +25,7 @@ export class CoverView extends View {
     this.title = new PIXI.Text(title,
       TextStyleBuilder.new()
         .setColor(this.bookModel.fontColor)
-        .setCustomOptions({fontSize: 70})
+        .setCustomOptions({ fontSize: 70 })
         .build());
     this.title.x = (this.width - this.title.width) / 2;
     this.title.y = 180;

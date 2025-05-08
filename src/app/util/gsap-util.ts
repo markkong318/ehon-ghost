@@ -1,6 +1,6 @@
-import {gsap} from 'gsap';
-import {DisplayObject} from 'pixi.js';
-import {AudioUtil} from './audio-util';
+import { gsap } from 'gsap';
+import { DisplayObject } from 'pixi.js';
+import { AudioUtil } from './audio-util';
 
 export namespace GsapUtil {
   export function toWait(tl: gsap.core.Timeline, duration: number = 0.75) {
@@ -55,10 +55,10 @@ export namespace GsapUtil {
   }
 
   export function toFadeIn(tl: gsap.core.Timeline, object: DisplayObject) {
-    tl.to(object, {alpha: 1, duration: 1});
+    tl.to(object, { alpha: 1, duration: 1 });
   }
 
   export function toFadeOut(tl: gsap.core.Timeline, object: DisplayObject) {
-    tl.to(object, {alpha: 0, duration: 1});
+    tl.to(object, { alpha: 0, duration: 1 });
   }
 }

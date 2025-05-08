@@ -1,4 +1,4 @@
-import {View} from '../../../../framework/view';
+import { View } from '../../../../framework/view';
 
 export class GridLayout {
   private parent: View;
@@ -10,7 +10,7 @@ export class GridLayout {
   private noResize: boolean;
 
   constructor(parent: View, sizeX: number, sizeY: number, padding: number,
-              {noResize}: { noResize: boolean } = {noResize: false}) {
+              { noResize }: { noResize: boolean } = { noResize: false }) {
     this.parent = parent;
     this.sizeX = sizeX;
     this.sizeY = sizeY;

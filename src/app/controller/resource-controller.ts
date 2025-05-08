@@ -3,15 +3,15 @@ import game from '../../assets/data/game.json';
 import illustrations from '../../assets/images/*.png';
 import voices from '../../assets/voices/*.wav';
 import bottle from '../../framework/bottle';
-import {Controller} from '../../framework/controller';
-import {BOTTLE_AUDIO_CONTEXT} from '../env/bottle';
-import {ArticleModel} from '../model/article-model';
-import {BookModel} from '../model/book-model';
-import {CoverModel} from '../model/cover-model';
-import {PageModel} from '../model/page-model';
-import {SentenceModel} from '../model/sentence-model';
-import {IllustrationResource} from '../storage/illustration-resource';
-import {VoiceResource} from '../storage/voice-resource';
+import { Controller } from '../../framework/controller';
+import { BOTTLE_AUDIO_CONTEXT } from '../env/bottle';
+import { ArticleModel } from '../model/article-model';
+import { BookModel } from '../model/book-model';
+import { CoverModel } from '../model/cover-model';
+import { PageModel } from '../model/page-model';
+import { SentenceModel } from '../model/sentence-model';
+import { IllustrationResource } from '../storage/illustration-resource';
+import { VoiceResource } from '../storage/voice-resource';
 
 export class ResourceController extends Controller {
   private illustrationResource: any = bottle.inject(IllustrationResource);
@@ -81,14 +81,24 @@ export class ResourceController extends Controller {
 
     for (let i = 0; i < game.book.pages.length; i++) {
       const pageModel = new PageModel();
-      pageModel.illustration = this.illustrationResource.get(game.book.pages[i].illustration);
 
       const articleModel = new ArticleModel();
 
       for (let j = 0; j < game.book.pages[i].article.sentences.length; j++) {
         const sentenceModel = new SentenceModel();
-        sentenceModel.text = game.book.pages[i].article.sentences[j].text;
-        sentenceModel.voice = this.voiceResource.get(game.book.pages[i].article.sentences[j].voice);
+        const sentence = game.book.pages[i].article.sentences[j];
+
+        if (sentence.text) {
+          sentenceModel.text = game.book.pages[i].article.sentences[j].text;
+        }
+
+        if (sentence.voice) {
+          sentenceModel.voice = this.voiceResource.get(sentence.voice);
+        }
+
+        if (sentence.illustration) {
+          sentenceModel.illustration = this.illustrationResource.get(sentence.illustration);
+        }
 
         articleModel.sentences.push(sentenceModel);
       }

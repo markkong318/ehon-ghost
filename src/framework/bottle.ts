@@ -54,7 +54,7 @@ export default new class Bottle {
   }
 
   singleton(srcClass: { new(...any): any }, options?: { key?: string, args?: any[] }): any {
-    const {key, args = []} = options || {};
+    const { key, args = [] } = options || {};
 
     if (!srcClass.name) {
       throw new Error('Argument is not a class');

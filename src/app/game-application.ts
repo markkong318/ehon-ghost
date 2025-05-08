@@ -1,15 +1,15 @@
-import {Application} from '../framework/application';
+import { Application } from '../framework/application';
 import bottle from '../framework/bottle';
-import {Size} from '../framework/size';
-import {View} from '../framework/view';
+import { Size } from '../framework/size';
+import { View } from '../framework/view';
 import '../vendor/unmute.js';
-import {MainController} from './controller/main-controller';
-import {ResourceController} from './controller/resource-controller';
-import {IllustrationResource} from './storage/illustration-resource';
-import {Storage} from './storage/storage';
-import {VoiceResource} from './storage/voice-resource';
-import {GameView} from './view/game-view';
-import {LoadingView} from './view/loading-view';
+import { MainController } from './controller/main-controller';
+import { ResourceController } from './controller/resource-controller';
+import { IllustrationResource } from './storage/illustration-resource';
+import { Storage } from './storage/storage';
+import { VoiceResource } from './storage/voice-resource';
+import { GameView } from './view/game-view';
+import { LoadingView } from './view/loading-view';
 
 export class GameApplication extends Application {
   private mainController: MainController;

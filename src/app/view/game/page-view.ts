@@ -1,15 +1,15 @@
-import {gsap} from 'gsap';
+import { gsap } from 'gsap';
 import * as PIXI from 'pixi.js';
 import bottle from '../../../framework/bottle';
 import rocket from '../../../framework/rocket';
-import {View} from '../../../framework/view';
-import {BOTTLE_AUDIO_CONTEXT} from '../../env/bottle';
-import {EVENT_NEXT_PAGE} from '../../env/event';
-import {ArticleModel} from '../../model/article-model';
-import {BookModel} from '../../model/book-model';
+import { View } from '../../../framework/view';
+import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
+import { EVENT_NEXT_PAGE } from '../../env/event';
+import { ArticleModel } from '../../model/article-model';
+import { BookModel } from '../../model/book-model';
 import { TextStyleBuilder } from '../../style/text-style-builder';
-import {GsapUtil} from '../../util/gsap-util';
-import {ArticleView} from './component/article-view';
+import { GsapUtil } from '../../util/gsap-util';
+import { ArticleView } from './component/article-view';
 
 export class PageView extends View {
 
@@ -27,19 +27,19 @@ export class PageView extends View {
 
   }
 
-  public fadeInIllustration(tl: gsap.core.Timeline) {
-    GsapUtil.toFadeIn(tl, this.illustration);
-  }
+  // public fadeInIllustration(tl: gsap.core.Timeline) {
+  //   GsapUtil.toFadeIn(tl, this.illustration);
+  // }
 
   public fadeInNextBtn(tl: gsap.core.Timeline) {
     GsapUtil.toFadeIn(tl, this.nextBtn);
   }
 
-  public setAssets(articleModel: ArticleModel, illustration: PIXI.Sprite) {
+  public setAssets(articleModel: ArticleModel) {
 
-    if (this.illustration != null) {
-      this.removeChild(this.illustration);
-    }
+    // if (this.illustration != null) {
+    //   this.removeChild(this.illustration);
+    // }
 
     if (this.articleView != null) {
       this.removeChild(this.articleView);
@@ -49,11 +49,11 @@ export class PageView extends View {
       this.removeChild(this.nextBtn);
     }
 
-    this.illustration = illustration;
-    this.illustration.alpha = 0;
-    this.illustration.x = (this.width - this.illustration.width) / 2;
-    this.illustration.y = 230;
-    this.addChild(illustration);
+    // this.illustration = illustration;
+    // this.illustration.alpha = 0;
+    // this.illustration.x = (this.width - this.illustration.width) / 2;
+    // this.illustration.y = 230;
+    // this.addChild(illustration);
 
     this.articleView = new ArticleView(articleModel);
     this.articleView.setRenderWidth(this.width);
@@ -74,7 +74,7 @@ export class PageView extends View {
 
   public play(tl: gsap.core.Timeline, isLast: boolean) {
     this.fadeIn(tl);
-    this.fadeInIllustration(tl);
+    // this.fadeInIllustration(tl);
     this.articleView.play(tl);
 
     if (!isLast) {

@@ -22,10 +22,12 @@
             {
               "text": "笑顔いっぱいで会場に向かいます。",
               "voice": "voice_1_3"
+            },
+            {
+              "illustration": "illustration1"
             }
           ]
-        },
-        "illustration": "illustration1"
+        }
       }
     ],
     "voiceEnd": "voice_end"

@@ -1,11 +1,11 @@
-import * as PIXI from 'pixi.js';
 import FontFaceObserver from 'fontfaceobserver';
 import gsap from 'gsap';
 import PixiPlugin from 'gsap/PixiPlugin';
-import fonts from './assets/fonts/**/style.css';
-
-import {GameApplication} from './app/game-application';
+import * as PIXI from 'pixi.js';
 import * as packageJson from '../package.json';
+
+import { GameApplication } from './app/game-application';
+import fonts from './assets/fonts/**/style.css';
 
 // import './assets/fonts/lato-light/style.css';
 // import './assets/fonts/lato/style.css';
@@ -21,7 +21,7 @@ document.title = packageJson.name;
 console.log(fonts);
 
 (async (fonts) => {
-  for(const font in fonts) {
+  for (const font in fonts) {
     console.log(`loading font: ${font}`)
     await new FontFaceObserver(font).load();
   }

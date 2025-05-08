@@ -1,8 +1,10 @@
-import {gsap} from 'gsap';
-import {View} from '../../../../framework/view';
-import {ArticleModel} from '../../../model/article-model';
-import {GsapUtil} from '../../../util/gsap-util';
-import {SentenceView} from './sentence-view';
+import { gsap } from 'gsap';
+import { View } from '../../../../framework/view';
+import { ArticleModel } from '../../../model/article-model';
+import { isIllustration, isSentence } from '../../../util/article-util';
+import { GsapUtil } from '../../../util/gsap-util';
+import { IllustrationView } from './illustration-view';
+import { SentenceView } from './sentence-view';
 
 export class ArticleView extends View {
 
@@ -25,7 +27,20 @@ export class ArticleView extends View {
     let y = 0;
 
     for (let i = 0; i < this.articleModel.sentences.length; i++) {
-      const view = new SentenceView(this.articleModel.sentences[i].text, this.articleModel.sentences[i].voice);
+      const sentence = this.articleModel.sentences[i];
+
+      let view;
+
+      if (isSentence(sentence)) {
+        view = new SentenceView(sentence.text, sentence.voice);
+      } else if (isIllustration(sentence)) {
+        view = new IllustrationView(sentence.illustration);
+      }
+
+      if (!view) {
+        continue;
+      }
+
       view.setRenderWidth(width);
       view.x = 0;
       view.y = y;

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import {View} from '../../../framework/view';
+import { View } from '../../../framework/view';
 
 export class TouchSprite extends PIXI.Sprite {
   private isDown: boolean = false;
@@ -83,7 +83,7 @@ export class TouchSprite extends PIXI.Sprite {
   }
 
   private checkCollision(event) {
-    const {x, y} = this.baseView.toLocal(event.global);
+    const { x, y } = this.baseView.toLocal(event.global);
 
     for (let i = 0; i < this.views.length; i++) {
       const view = this.views[i];

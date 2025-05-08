@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import {View} from './view';
+import { View } from './view';
 
 export class Background {
   public _texture: PIXI.Texture = PIXI.Texture.WHITE;

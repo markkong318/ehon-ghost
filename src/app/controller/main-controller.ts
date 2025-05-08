@@ -1,13 +1,13 @@
-import {gsap} from 'gsap';
+import { gsap } from 'gsap';
 import bottle from '../../framework/bottle';
-import {Controller} from '../../framework/controller';
+import { Controller } from '../../framework/controller';
 import rocket from '../../framework/rocket';
-import {EVENT_NEXT_PAGE} from '../env/event';
-import {PAGE_NUMBER_COVER, PAGE_NUMBER_INITIAL} from '../env/game';
-import {BookModel} from '../model/book-model';
-import {CoverView} from '../view/game/cover-view';
-import {PageView} from '../view/game/page-view';
-import {ResourceController} from './resource-controller';
+import { EVENT_NEXT_PAGE } from '../env/event';
+import { PAGE_NUMBER_COVER, PAGE_NUMBER_INITIAL } from '../env/game';
+import { BookModel } from '../model/book-model';
+import { CoverView } from '../view/game/cover-view';
+import { PageView } from '../view/game/page-view';
+import { ResourceController } from './resource-controller';
 
 export class MainController extends Controller {
 
@@ -59,7 +59,7 @@ export class MainController extends Controller {
     }
 
     // this.pageView.fadeOut(this.tl);
-    this.pageView.setAssets(this.bookModel.pages[this.pageIdx].article, this.bookModel.pages[this.pageIdx].illustration)
+    this.pageView.setAssets(this.bookModel.pages[this.pageIdx].article);
     this.pageView.fadeIn(this.tl);
 
     this.pageView.play(this.tl, this.pageIdx === this.bookModel.pages.length - 1);
