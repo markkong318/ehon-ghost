@@ -48,12 +48,10 @@ export class GameView extends View {
     auxBottomLineGraphic.y = (this.size.height - height) / 2 + height;
     this.addChild(auxBottomLineGraphic);
 
-    // this.touchSprite = bottle.singleton(TouchSprite);
-    // this.touchSprite.width = this.width;
-    // this.touchSprite.height = this.height;
-    // this.touchSprite.interactive = true;
-    // this.addChild(this.touchSprite);
-
-    // this.touchSprite.setBaseView(this.flickerView);
+    this.touchSprite = bottle.singleton(TouchSprite);
+    this.touchSprite.width = this.width;
+    this.touchSprite.height = this.height;
+    this.touchSprite.interactive = true;
+    this.addChild(this.touchSprite);
   }
 }

@@ -28,18 +28,19 @@ export class CoverView extends View {
         .setColor(this.bookModel.fontColor)
         .setCustomOptions({ fontSize: 70 })
         .build());
-    this.titleText.x = (this.width - this.titleText.width) / 2;
-    this.titleText.y = 180;
+    this.titleText.x = this.width - this.titleText.width;
+    this.titleText.y = this.height - this.titleText.height;
     this.titleText.alpha = 1;
     this.addChild(this.titleText);
 
-    this.nextBtnText = new PIXI.Text('次へ',
+    this.nextBtnText = new PIXI.Text('▼',
       TextStyleBuilder.new()
         .setColor(this.bookModel.fontColor)
+        .setFontSize(12)
         .build());
     this.nextBtnText.anchor = new PIXI.ObservablePoint(() => {}, () => {}, 0.5, 0.5);
-    this.nextBtnText.x = (this.width) / 2;
-    this.nextBtnText.y = 420;
+    this.nextBtnText.x = this.width - this.nextBtnText.width;
+    this.nextBtnText.y = this.height - this.nextBtnText.height;
     this.nextBtnText.alpha = 1;
     this.nextBtnText.interactive = true;
     this.nextBtnText.on('pointerdown', async () => {

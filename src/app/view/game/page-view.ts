@@ -47,8 +47,11 @@ export class PageView extends View {
     this.articleView.y = 50;
     this.addChild(this.articleView);
 
-    const style = TextStyleBuilder.new().setColor(this.bookModel.fontColor).build();
-    this.nextBtn = new PIXI.Text('次へ', style);
+    this.nextBtn = new PIXI.Text('▼',
+      TextStyleBuilder.new()
+        .setColor(this.bookModel.fontColor)
+        .setFontSize(12)
+        .build());
     this.nextBtn.x = this.width - this.nextBtn.width - 50;
     this.nextBtn.y = this.height - this.nextBtn.height - 20;
     this.nextBtn.alpha = 0;
