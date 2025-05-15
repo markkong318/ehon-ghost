@@ -7,14 +7,15 @@ import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
 import { EVENT_NEXT_PAGE } from '../../env/event';
 import { BookModel } from '../../model/book-model';
 import { TextStyleBuilder } from '../../style/text-style-builder';
+import { applyShake } from '../../util/cover-util';
 import { GsapUtil } from '../../util/gsap-util';
 
 export class CoverView extends View {
 
   private bookModel: BookModel = bottle.inject(BookModel);
   private audioContext: AudioContext = bottle.inject(BOTTLE_AUDIO_CONTEXT);
-  private title: PIXI.Text;
-  private nextBtn: PIXI.Text;
+  private titleText: PIXI.Text;
+  private nextBtnText: PIXI.Text;
 
   constructor() {
     super();
@@ -22,36 +23,37 @@ export class CoverView extends View {
 
   public setAssets(title: string) {
 
-    this.title = new PIXI.Text(title,
+    this.titleText = new PIXI.Text(title,
       TextStyleBuilder.new()
         .setColor(this.bookModel.fontColor)
         .setCustomOptions({ fontSize: 70 })
         .build());
-    this.title.x = (this.width - this.title.width) / 2;
-    this.title.y = 180;
-    this.title.alpha = 1;
-    this.addChild(this.title);
+    this.titleText.x = (this.width - this.titleText.width) / 2;
+    this.titleText.y = 180;
+    this.titleText.alpha = 1;
+    this.addChild(this.titleText);
 
-    this.nextBtn = new PIXI.Text('次へ',
+    this.nextBtnText = new PIXI.Text('次へ',
       TextStyleBuilder.new()
         .setColor(this.bookModel.fontColor)
         .build());
-    this.nextBtn.anchor = new PIXI.ObservablePoint(() => {
-    }, () => {
-    }, 0.5, 0.5);
-    this.nextBtn.x = (this.width) / 2;
-    this.nextBtn.y = 420;
-    this.nextBtn.alpha = 1;
-    this.nextBtn.interactive = true;
-    this.nextBtn.on('pointerdown', async () => {
-      this.nextBtn.scale = new PIXI.Point(2, 2);
+    this.nextBtnText.anchor = new PIXI.ObservablePoint(() => {}, () => {}, 0.5, 0.5);
+    this.nextBtnText.x = (this.width) / 2;
+    this.nextBtnText.y = 420;
+    this.nextBtnText.alpha = 1;
+    this.nextBtnText.interactive = true;
+    this.nextBtnText.on('pointerdown', async () => {
+      this.nextBtnText.scale = new PIXI.Point(2, 2);
       rocket.emit(EVENT_NEXT_PAGE)
     });
-    this.nextBtn.on('pointerup', async () => {
-      this.nextBtn.interactive = false;
-      this.nextBtn.scale = new PIXI.Point(1, 1);
+    this.nextBtnText.on('pointerup', async () => {
+      this.nextBtnText.interactive = false;
+      this.nextBtnText.scale = new PIXI.Point(1, 1);
     });
-    this.addChild(this.nextBtn);
+    this.addChild(this.nextBtnText);
+
+    const ticker = PIXI.Ticker.shared;
+    ticker.add(() => applyShake(this.titleText, 0.7));
   }
 
   public fadeIn(tl: gsap.core.Timeline) {

@@ -1,4 +1,3 @@
-import { Sprite } from 'pixi.js';
 import { Model } from '../../framework/model';
 import { ArticleModel } from './article-model';
 

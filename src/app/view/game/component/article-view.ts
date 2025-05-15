@@ -3,15 +3,15 @@ import { View } from '../../../../framework/view';
 import { ArticleModel } from '../../../model/article-model';
 import { isIllustration, isSentence } from '../../../util/article-util';
 import { GsapUtil } from '../../../util/gsap-util';
-import { IllustrationView } from './illustration-view';
-import { SentenceView } from './sentence-view';
+import { IllustrationView } from './paragraph/illustration-view';
+import { SentenceView } from './paragraph/sentence-view';
 
 export class ArticleView extends View {
 
   private articleModel: ArticleModel;
   private sentenceViews: SentenceView[] = [];
 
-  private renderWidth: number;
+  private targetWidth: number;
 
   constructor(articleModel: ArticleModel) {
     super();
@@ -21,27 +21,27 @@ export class ArticleView extends View {
   public init() {
     super.init();
 
-    const width = this.renderWidth;
+    const width = this.targetWidth;
     const interval = 10;
 
     let y = 0;
 
-    for (let i = 0; i < this.articleModel.sentences.length; i++) {
-      const sentence = this.articleModel.sentences[i];
+    for (let i = 0; i < this.articleModel.paragraphs.length; i++) {
+      const paragraph = this.articleModel.paragraphs[i];
 
       let view;
 
-      if (isSentence(sentence)) {
-        view = new SentenceView(sentence.text, sentence.voice);
-      } else if (isIllustration(sentence)) {
-        view = new IllustrationView(sentence.illustration);
+      if (isSentence(paragraph)) {
+        view = new SentenceView(paragraph.text, paragraph.voice);
+      } else if (isIllustration(paragraph)) {
+        view = new IllustrationView(paragraph.illustration);
       }
 
       if (!view) {
         continue;
       }
 
-      view.setRenderWidth(width);
+      view.setTargetWidth(width);
       view.x = 0;
       view.y = y;
 
@@ -55,17 +55,13 @@ export class ArticleView extends View {
   }
 
   public play(tl: gsap.core.Timeline) {
-    for (let i = 0; i < this.articleModel.sentences.length; i++) {
+    for (let i = 0; i < this.articleModel.paragraphs.length; i++) {
       this.sentenceViews[i].play(tl);
       GsapUtil.toWait(tl);
     }
   }
 
-  // public getMaxTextWidth() {
-  //   return Math.max(...this.sentenceViews.map(view => view.getTextWidth()));
-  // }
-
   public setRenderWidth(width: number) {
-    this.renderWidth = width;
+    this.targetWidth = width;
   }
 }

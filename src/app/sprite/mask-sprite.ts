@@ -33,6 +33,6 @@ export class MaskSprite {
 
     this.sprite = new PIXI.Sprite(gradient);
 
-    return this.sprite
+    return this.sprite;
   }
 }

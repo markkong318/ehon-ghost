@@ -16,7 +16,6 @@ export class PageView extends View {
   private bookModel: BookModel = bottle.inject(BookModel);
   private audioContext: AudioContext = bottle.inject(BOTTLE_AUDIO_CONTEXT);
   private articleView: ArticleView;
-  private illustration: PIXI.Sprite;
   private nextBtn: PIXI.Text;
 
   constructor() {
@@ -27,19 +26,11 @@ export class PageView extends View {
 
   }
 
-  // public fadeInIllustration(tl: gsap.core.Timeline) {
-  //   GsapUtil.toFadeIn(tl, this.illustration);
-  // }
-
   public fadeInNextBtn(tl: gsap.core.Timeline) {
     GsapUtil.toFadeIn(tl, this.nextBtn);
   }
 
   public setAssets(articleModel: ArticleModel) {
-
-    // if (this.illustration != null) {
-    //   this.removeChild(this.illustration);
-    // }
 
     if (this.articleView != null) {
       this.removeChild(this.articleView);
@@ -48,12 +39,6 @@ export class PageView extends View {
     if (this.nextBtn != null) {
       this.removeChild(this.nextBtn);
     }
-
-    // this.illustration = illustration;
-    // this.illustration.alpha = 0;
-    // this.illustration.x = (this.width - this.illustration.width) / 2;
-    // this.illustration.y = 230;
-    // this.addChild(illustration);
 
     this.articleView = new ArticleView(articleModel);
     this.articleView.setRenderWidth(this.width);
@@ -74,14 +59,13 @@ export class PageView extends View {
 
   public play(tl: gsap.core.Timeline, isLast: boolean) {
     this.fadeIn(tl);
-    // this.fadeInIllustration(tl);
     this.articleView.play(tl);
 
     if (!isLast) {
       this.fadeInNextBtn(tl);
     } else {
       GsapUtil.toWait(tl);
-      GsapUtil.toVoice(tl, this.bookModel.voiceEnd, this.audioContext);
+      GsapUtil.toVoice(tl, this.bookModel.endVoice, this.audioContext);
     }
   }
 

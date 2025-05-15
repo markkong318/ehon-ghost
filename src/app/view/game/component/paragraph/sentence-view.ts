@@ -1,12 +1,12 @@
 import { gsap } from 'gsap';
 import * as PIXI from 'pixi.js';
-import bottle from '../../../../framework/bottle';
-import { View } from '../../../../framework/view';
-import { BOTTLE_AUDIO_CONTEXT } from '../../../env/bottle';
-import { BookModel } from '../../../model/book-model';
-import { MaskSprite } from '../../../sprite/mask-sprite';
-import { TextStyleBuilder } from '../../../style/text-style-builder';
-import { GsapUtil } from '../../../util/gsap-util';
+import bottle from '../../../../../framework/bottle';
+import { View } from '../../../../../framework/view';
+import { BOTTLE_AUDIO_CONTEXT } from '../../../../env/bottle';
+import { BookModel } from '../../../../model/book-model';
+import { MaskSprite } from '../../../../sprite/mask-sprite';
+import { TextStyleBuilder } from '../../../../style/text-style-builder';
+import { GsapUtil } from '../../../../util/gsap-util';
 
 export class SentenceView extends View {
 
@@ -18,7 +18,7 @@ export class SentenceView extends View {
   private maskSprites: PIXI.Sprite[];
 
   private fontSize: number;
-  private renderWidth: number;
+  private targetWidth: number;
   private textMetrics: PIXI.TextMetrics;
 
   constructor(text: string, voice: AudioBuffer) {
@@ -32,7 +32,7 @@ export class SentenceView extends View {
   public init() {
     const style = TextStyleBuilder.new()
       .setColor(this.bookModel.fontColor)
-      .setMultiLine(this.renderWidth)
+      .setMultiLine(this.targetWidth)
       .setFontSize(this.fontSize)
       .build();
 
@@ -67,7 +67,7 @@ export class SentenceView extends View {
     GsapUtil.toTextsVoice(tl, this.maskSprites, xs, this.voice.duration, this.voice, this.audioContext);
   }
 
-  setRenderWidth(width: number) {
-    this.renderWidth = width;
+  setTargetWidth(width: number) {
+    this.targetWidth = width;
   }
 }

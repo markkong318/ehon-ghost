@@ -1,10 +1,9 @@
-import { ArticleModel } from '../model/article-model';
-import { SentenceModel } from '../model/sentence-model';
+import { ParagraphModel } from '../model/paragraph-model';
 
-export function isSentence(model: SentenceModel) {
+export function isSentence(model: ParagraphModel) {
   return !model.illustration;
 }
 
-export function isIllustration(model: SentenceModel) {
+export function isIllustration(model: ParagraphModel) {
   return !!model.illustration;
 }

@@ -9,7 +9,7 @@ import { ArticleModel } from '../model/article-model';
 import { BookModel } from '../model/book-model';
 import { CoverModel } from '../model/cover-model';
 import { PageModel } from '../model/page-model';
-import { SentenceModel } from '../model/sentence-model';
+import { ParagraphModel } from '../model/paragraph-model';
 import { IllustrationResource } from '../storage/illustration-resource';
 import { VoiceResource } from '../storage/voice-resource';
 
@@ -72,7 +72,7 @@ export class ResourceController extends Controller {
     this.bookModel = new BookModel();
     this.bookModel.backgroundColor = parseInt(game.book.backgroundColor, 16);
     this.bookModel.fontColor = parseInt(game.book.fontColor, 16);
-    this.bookModel.voiceEnd = this.voiceResource.get(game.book.voiceEnd);
+    this.bookModel.endVoice = this.voiceResource.get(game.book.endVoice);
 
     const coverModel = new CoverModel();
     coverModel.title = game.book.cover.title;
@@ -84,23 +84,23 @@ export class ResourceController extends Controller {
 
       const articleModel = new ArticleModel();
 
-      for (let j = 0; j < game.book.pages[i].article.sentences.length; j++) {
-        const sentenceModel = new SentenceModel();
-        const sentence = game.book.pages[i].article.sentences[j];
+      for (let j = 0; j < game.book.pages[i].article.paragraphs.length; j++) {
+        const paragraphModel = new ParagraphModel();
+        const paragraph = game.book.pages[i].article.paragraphs[j];
 
-        if (sentence.text) {
-          sentenceModel.text = game.book.pages[i].article.sentences[j].text;
+        if (paragraph.text) {
+          paragraphModel.text = game.book.pages[i].article.paragraphs[j].text;
         }
 
-        if (sentence.voice) {
-          sentenceModel.voice = this.voiceResource.get(sentence.voice);
+        if (paragraph.voice) {
+          paragraphModel.voice = this.voiceResource.get(paragraph.voice);
         }
 
-        if (sentence.illustration) {
-          sentenceModel.illustration = this.illustrationResource.get(sentence.illustration);
+        if (paragraph.illustration) {
+          paragraphModel.illustration = this.illustrationResource.get(paragraph.illustration);
         }
 
-        articleModel.sentences.push(sentenceModel);
+        articleModel.paragraphs.push(paragraphModel);
       }
 
       pageModel.article = articleModel;

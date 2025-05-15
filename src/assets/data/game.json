@@ -10,7 +10,7 @@
     "pages": [
       {
         "article": {
-          "sentences": [
+          "paragraphs": [
             {
               "text": "今日は待ちに待った夏祭り！今日は待ちに待った夏祭り！今日は待ちに待った夏祭り！今日は待ちに待った夏祭り！",
               "voice": "voice_1_1"
@@ -30,6 +30,6 @@
         }
       }
     ],
-    "voiceEnd": "voice_end"
+    "endVoice": "voice_end"
   }
 }

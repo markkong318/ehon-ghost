@@ -1,6 +1,6 @@
 import { Model } from '../../framework/model';
-import { SentenceModel } from './sentence-model';
+import { ParagraphModel } from './paragraph-model';
 
 export class ArticleModel extends Model {
-  public sentences: SentenceModel[] = [];
+  public paragraphs: ParagraphModel[] = [];
 }
