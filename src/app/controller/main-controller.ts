@@ -1,20 +1,21 @@
+import * as PIXI from 'pixi.js';
 import { gsap } from 'gsap';
 import bottle from '../../framework/bottle';
 import { Controller } from '../../framework/controller';
 import rocket from '../../framework/rocket';
-import { EVENT_NEXT_PAGE } from '../env/event';
+import { EVENT_GO_NEXT_PAGE, EVENT_SET_TOUCH_ACTIVE } from '../env/event';
 import { PAGE_NUMBER_COVER, PAGE_NUMBER_INITIAL } from '../env/game';
 import { BookModel } from '../model/book-model';
 import { CoverView } from '../view/game/cover-view';
 import { PageView } from '../view/game/page-view';
-import { ResourceController } from './resource-controller';
+import { TouchSprite } from '../view/game/touch-sprite';
 
 export class MainController extends Controller {
 
-  private resourceController: ResourceController = bottle.inject(ResourceController);
   private bookModel: BookModel = bottle.inject(BookModel);
   private coverView: CoverView = bottle.inject(CoverView);
   private pageView: PageView = bottle.inject(PageView);
+  private touchSprite: TouchSprite = bottle.inject(TouchSprite);
 
   private pageIdx: number = 0;
   private tl: gsap.core.Timeline;
@@ -25,12 +26,16 @@ export class MainController extends Controller {
     await this.initEvent();
     await this.initBook();
 
-    this.nextPage();
+    this.goNextPage();
   }
 
   private async initEvent() {
-    rocket.on(EVENT_NEXT_PAGE, async () => {
-      this.nextPage();
+    rocket.on(EVENT_GO_NEXT_PAGE, async () => {
+      this.goNextPage();
+    });
+
+    rocket.on(EVENT_SET_TOUCH_ACTIVE, async () => {
+      this.setTouchActive();
     });
   }
 
@@ -38,7 +43,7 @@ export class MainController extends Controller {
     this.pageIdx = PAGE_NUMBER_INITIAL;
   }
 
-  private nextPage() {
+  private goNextPage() {
     this.pageIdx++;
 
     if (this.pageIdx >= this.bookModel.pages.length) {
@@ -48,8 +53,11 @@ export class MainController extends Controller {
     if (this.pageIdx === PAGE_NUMBER_COVER) {
       this.coverView.setAssets(this.bookModel.cover.title);
       this.coverView.fadeIn(this.tl);
+      this.touchSprite.setActive(true);
       return;
     }
+
+    this.touchSprite.setActive(false);
 
     if (this.pageIdx === 0) {
       this.coverView.play(this.tl);
@@ -63,5 +71,9 @@ export class MainController extends Controller {
     this.pageView.fadeIn(this.tl);
 
     this.pageView.play(this.tl, this.pageIdx === this.bookModel.pages.length - 1);
+  }
+
+  private setTouchActive() {
+    this.touchSprite.setActive(true);
   }
 }

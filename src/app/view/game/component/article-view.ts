@@ -61,7 +61,7 @@ export class ArticleView extends View {
     }
   }
 
-  public setRenderWidth(width: number) {
+  public setTargetWidth(width: number) {
     this.targetWidth = width;
   }
 }

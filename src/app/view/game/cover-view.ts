@@ -4,7 +4,7 @@ import bottle from '../../../framework/bottle';
 import rocket from '../../../framework/rocket';
 import { View } from '../../../framework/view';
 import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
-import { EVENT_NEXT_PAGE } from '../../env/event';
+import { EVENT_GO_NEXT_PAGE } from '../../env/event';
 import { BookModel } from '../../model/book-model';
 import { TextStyleBuilder } from '../../style/text-style-builder';
 import { applyShake } from '../../util/cover-util';
@@ -45,7 +45,7 @@ export class CoverView extends View {
     this.nextBtnText.interactive = true;
     this.nextBtnText.on('pointerdown', async () => {
       this.nextBtnText.scale = new PIXI.Point(2, 2);
-      rocket.emit(EVENT_NEXT_PAGE)
+      rocket.emit(EVENT_GO_NEXT_PAGE)
     });
     this.nextBtnText.on('pointerup', async () => {
       this.nextBtnText.interactive = false;

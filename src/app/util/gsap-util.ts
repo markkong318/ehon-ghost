@@ -32,8 +32,6 @@ export namespace GsapUtil {
   export function toTextsVoice(tl: gsap.core.Timeline, objects: DisplayObject[], xs: number[], duration: number, voice: AudioBuffer, audioContext: AudioContext) {
     const segmentDuration = duration / objects.length;
 
-    console.log('du:' + duration);
-
     for (let i = 0; i < objects.length; i++) {
       const object = objects[i];
       const targetX = xs[i];

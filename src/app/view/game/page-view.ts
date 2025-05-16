@@ -4,7 +4,7 @@ import bottle from '../../../framework/bottle';
 import rocket from '../../../framework/rocket';
 import { View } from '../../../framework/view';
 import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
-import { EVENT_NEXT_PAGE } from '../../env/event';
+import { EVENT_GO_NEXT_PAGE, EVENT_SET_TOUCH_ACTIVE } from '../../env/event';
 import { ArticleModel } from '../../model/article-model';
 import { BookModel } from '../../model/book-model';
 import { TextStyleBuilder } from '../../style/text-style-builder';
@@ -28,6 +28,7 @@ export class PageView extends View {
 
   public fadeInNextBtn(tl: gsap.core.Timeline) {
     GsapUtil.toFadeIn(tl, this.nextBtn);
+    rocket.emit(EVENT_SET_TOUCH_ACTIVE);
   }
 
   public setAssets(articleModel: ArticleModel) {
@@ -41,7 +42,7 @@ export class PageView extends View {
     }
 
     this.articleView = new ArticleView(articleModel);
-    this.articleView.setRenderWidth(this.width);
+    this.articleView.setTargetWidth(this.width);
     this.articleView.init();
     this.articleView.x = 0;
     this.articleView.y = 50;
@@ -56,7 +57,7 @@ export class PageView extends View {
     this.nextBtn.y = this.height - this.nextBtn.height - 20;
     this.nextBtn.alpha = 0;
     this.nextBtn.interactive = true;
-    this.nextBtn.on('pointerdown', () => rocket.emit(EVENT_NEXT_PAGE));
+    this.nextBtn.on('pointerdown', () => rocket.emit(EVENT_GO_NEXT_PAGE));
     this.addChild(this.nextBtn);
   }
 

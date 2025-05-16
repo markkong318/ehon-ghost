@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import rocket from '../../../framework/rocket';
-import { EVENT_NEXT_PAGE } from '../../env/event';
+import { EVENT_GO_NEXT_PAGE } from '../../env/event';
 
 export class TouchSprite extends PIXI.Sprite {
   private isDown: boolean = false;
@@ -31,7 +31,7 @@ export class TouchSprite extends PIXI.Sprite {
         return;
       }
 
-      rocket.emit(EVENT_NEXT_PAGE);
+      rocket.emit(EVENT_GO_NEXT_PAGE);
 
       this.isDown = false;
     });
