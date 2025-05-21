@@ -7,6 +7,7 @@ import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
 import { EVENT_GO_NEXT_PAGE } from '../../env/event';
 import { BookModel } from '../../model/book-model';
 import { TextStyleBuilder } from '../../style/text-style-builder';
+import { AudioUtil } from '../../util/audio-util';
 import { applyShake } from '../../util/cover-util';
 import { GsapUtil } from '../../util/gsap-util';
 
@@ -16,12 +17,29 @@ export class CoverView extends View {
   private audioContext: AudioContext = bottle.inject(BOTTLE_AUDIO_CONTEXT);
   private titleText: PIXI.Text;
   private nextBtnText: PIXI.Text;
+  private noiseSprite: PIXI.Sprite;
+  private ticker: PIXI.Ticker;
 
   constructor() {
     super();
   }
 
   public setAssets(title: string) {
+    this.ticker = new PIXI.Ticker();
+    this.ticker.start();
+
+    const noiseFilter = new PIXI.filters.NoiseFilter();
+    noiseFilter.noise = 10;
+    noiseFilter.seed = 0.5;
+
+    this.noiseSprite = new PIXI.Sprite(PIXI.Texture.WHITE);
+    this.noiseSprite.width = this.size.width;
+    this.noiseSprite.height = this.size.height;
+    this.noiseSprite.tint = this.bookModel.backgroundColor;
+    this.noiseSprite.filters = [noiseFilter];
+    this.addChild(this.noiseSprite);
+
+    this.ticker.add(() => { noiseFilter.seed += 0.002; });
 
     this.titleText = new PIXI.Text(title,
       TextStyleBuilder.new()
@@ -53,8 +71,7 @@ export class CoverView extends View {
     });
     this.addChild(this.nextBtnText);
 
-    const ticker = PIXI.Ticker.shared;
-    ticker.add(() => applyShake(this.titleText, 0.7));
+    this.ticker.add(() => applyShake(this.titleText, 0.7));
   }
 
   public fadeIn(tl: gsap.core.Timeline) {
@@ -63,6 +80,14 @@ export class CoverView extends View {
 
   public fadeOut(tl: gsap.core.Timeline) {
     GsapUtil.toFadeOut(tl, this);
+    tl.to(null, {
+      onStart: async function (ticker) {
+        ticker.stop();
+      },
+      onStartParams: [this.ticker],
+    });
+    // ticker.
+    // this.ticker.stop();
   }
 
   public play(tl: gsap.core.Timeline) {

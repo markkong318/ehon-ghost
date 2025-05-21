@@ -64,7 +64,7 @@ export class SentenceView extends View {
       xs[i] = this.textSprite.x + this.textMetrics.lineWidths[i] - MaskSprite.WIDTH + MaskSprite.GRADIENT_WIDTH;
     }
 
-    GsapUtil.toTextsVoice(tl, this.maskSprites, xs, this.voice.duration, this.voice, this.audioContext);
+    GsapUtil.toTextsVoice(tl, this.maskSprites, xs, this.voice, this.audioContext);
   }
 
   setTargetWidth(width: number) {

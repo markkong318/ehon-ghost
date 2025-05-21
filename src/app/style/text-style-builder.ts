@@ -7,7 +7,7 @@ export class TextStyleBuilder {
     dropShadowAngle: 0,
     dropShadowBlur: 5,
     dropShadowDistance: 0,
-    fill: ['#ffffff'],
+    fill: ['#000000'],
     fillGradientType: 1,
     fillGradientStops: [0],
     lineJoin: 'round',
