@@ -28,7 +28,6 @@ export class PageView extends View {
 
   public fadeInNextBtn(tl: gsap.core.Timeline) {
     GsapUtil.toFadeIn(tl, this.nextBtn);
-    rocket.emit(EVENT_SET_TOUCH_ACTIVE);
   }
 
   public setAssets(articleModel: ArticleModel) {

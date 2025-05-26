@@ -42,7 +42,7 @@ export class SentenceView extends View {
     this.maskSprites = [];
     const maskView = new PIXI.Container();
     for (let i = 0; i < this.textMetrics.lines.length; i++) {
-      const maskSprite = new MaskSprite().get();
+      const maskSprite = bottle.singleton(MaskSprite).get();
 
       maskSprite.x = -MaskSprite.WIDTH;
       maskSprite.y = (this.textSprite.height / this.textMetrics.lines.length - maskSprite.height) / 2 + (this.textSprite.height / this.textMetrics.lines.length) * i;
@@ -59,12 +59,12 @@ export class SentenceView extends View {
   }
 
   play(tl: gsap.core.Timeline) {
-    const xs: number[] = [];
+    const targetXs: number[] = [];
     for (let i = 0; i < this.maskSprites.length; i++) {
-      xs[i] = this.textSprite.x + this.textMetrics.lineWidths[i] - MaskSprite.WIDTH + MaskSprite.GRADIENT_WIDTH;
+      targetXs[i] = this.textSprite.x + this.textMetrics.lineWidths[i] - MaskSprite.WIDTH + MaskSprite.GRADIENT_WIDTH;
     }
 
-    GsapUtil.toTextsVoice(tl, this.maskSprites, xs, this.voice, this.audioContext);
+    GsapUtil.toTextsVoice(tl, this.maskSprites, targetXs, this.voice, this.audioContext);
   }
 
   setTargetWidth(width: number) {

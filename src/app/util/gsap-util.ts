@@ -3,6 +3,14 @@ import { DisplayObject, Sprite } from 'pixi.js';
 import { AudioUtil } from './audio-util';
 
 export namespace GsapUtil {
+
+  export function toFunction(tl: gsap.core.Timeline, fn: gsap.Callback, params: object[]) {
+    tl.to(null, {
+      onStart: fn,
+      onStartParams: params,
+    });
+  }
+
   export function toWait(tl: gsap.core.Timeline, duration: number = 0.75) {
     tl.add(function () {
     }, `+=${duration}`);
@@ -29,26 +37,19 @@ export namespace GsapUtil {
     });
   }
 
-  export function toTextsVoice(tl: gsap.core.Timeline, objects: Sprite[], xs: number[], voice: AudioBuffer, audioContext: AudioContext) {
-    console.log(voice);
+  export function toTextsVoice(tl: gsap.core.Timeline, objects: Sprite[], targetXs: number[], voice: AudioBuffer, audioContext: AudioContext) {
     const duration = voice.duration;
-    console.log(xs)
 
     let objectLength = 0;
     for (let i = 0; i < objects.length; i++) {
-      objectLength += objects[i].width + xs[i];
+      objectLength += objects[i].width + targetXs[i];
     }
-
-    console.log(objects);
-    // console.log(segmentDuration);
 
     for (let i = 0; i < objects.length; i++) {
       const object = objects[i];
-      const targetX = xs[i];
+      const targetX = targetXs[i];
 
-      const segmentDuration = duration * ((objects[i].width + xs[i]) / objectLength);
-
-      console.log(segmentDuration);
+      const segmentDuration = duration * ((objects[i].width + targetXs[i]) / objectLength);
 
       tl.to(
         object,
@@ -57,7 +58,7 @@ export namespace GsapUtil {
           ease: 'none',
           duration: segmentDuration,
           onStart: async function (voice: AudioBuffer, audioContext: AudioContext) {
-            if (i === 0) { // Play audio only for the first object
+            if (i === 0) {
               AudioUtil.playAudio(voice, audioContext);
             }
           },
