@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import * as PIXI from 'pixi.js';
 import bottle from '../../../framework/bottle';
+import Rocket from '../../../framework/rocket';
 import rocket from '../../../framework/rocket';
 import { View } from '../../../framework/view';
 import { BOTTLE_AUDIO_CONTEXT } from '../../env/bottle';
@@ -65,7 +66,8 @@ export class PageView extends View {
     this.articleView.play(tl);
 
     if (!isLast) {
-      this.fadeInNextBtn(tl);
+      GsapUtil.toFunction(tl, () => Rocket.emit(EVENT_SET_TOUCH_ACTIVE));
+      GsapUtil.toFadeIn(tl, this.nextBtn);
     } else {
       GsapUtil.toWait(tl);
       GsapUtil.toVoice(tl, this.bookModel.endVoice, this.audioContext);

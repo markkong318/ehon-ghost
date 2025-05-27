@@ -34,9 +34,10 @@ export class MainController extends Controller {
       this.goNextPage();
     });
 
-    // rocket.on(EVENT_SET_TOUCH_ACTIVE, async () => {
-    //   this.setTouchActive();
-    // });
+    rocket.on(EVENT_SET_TOUCH_ACTIVE, async () => {
+      console.log("on EVENT_SET_TOUCH_ACTIVE");
+      this.setTouchActive();
+    });
   }
 
   private async initBook() {

@@ -11,8 +11,8 @@ export class TouchSprite extends PIXI.Sprite {
 
     this.interactive = true;
     this.on('pointerdown', () => {
-      console.log('Pointer down');
-      console.log('active: ' + this.isActive);
+      console.log(`Touch sprite pointer down, active: ${this.isActive}`);
+
       if (!this.isActive) {
         return;
       }
@@ -21,8 +21,8 @@ export class TouchSprite extends PIXI.Sprite {
     });
 
     this.on('pointerup', () => {
-      console.log('Pointer up');
-      console.log('active: ' + this.isActive);
+      console.log(`Touch sprite pointer up, active: ${this.isActive}`);
+
       if (!this.isActive) {
         return;
       }

@@ -4,7 +4,7 @@ import { AudioUtil } from './audio-util';
 
 export namespace GsapUtil {
 
-  export function toFunction(tl: gsap.core.Timeline, fn: gsap.Callback, params: object[]) {
+  export function toFunction(tl: gsap.core.Timeline, fn: gsap.Callback, params: object[] = []) {
     tl.to(null, {
       onStart: fn,
       onStartParams: params,
