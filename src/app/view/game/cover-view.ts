@@ -80,14 +80,6 @@ export class CoverView extends View {
 
   public fadeOut(tl: gsap.core.Timeline) {
     GsapUtil.toFadeOut(tl, this);
-
-    // tl.to(null, {
-    //   onStart: async function (ticker) {
-    //     ticker.stop();
-    //   },
-    //   onStartParams: [this.ticker],
-    // });
-
     GsapUtil.toFunction(tl, (ticker) => ticker.stop(), [this.ticker]);
   }
 

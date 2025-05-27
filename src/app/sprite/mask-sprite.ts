@@ -9,10 +9,6 @@ export class MaskSprite {
   private sprite: PIXI.Sprite;
 
   public get() {
-    // if (this.sprite) {
-    //   return this.sprite;
-    // }
-
     const canvas = document.createElement('canvas');
     canvas.width = MaskSprite.WIDTH;
     canvas.height = MaskSprite.HEIGHT;
