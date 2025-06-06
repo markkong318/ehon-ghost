@@ -11,4 +11,4 @@ export function applyShake(obj, intensity = 1) {
     obj.x -= x;
     obj.y -= y;
   }, randomRange(50, 150));
-};
+}
