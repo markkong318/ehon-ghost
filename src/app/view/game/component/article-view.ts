@@ -55,7 +55,7 @@ export class ArticleView extends View {
   }
 
   public play(tl: gsap.core.Timeline) {
-    for (let i = 0; i < this.articleModel.paragraphs.length; i++) {
+    for (let i = 0; i < this.sentenceViews.length; i++) {
       this.sentenceViews[i].play(tl);
       GsapUtil.toWait(tl);
     }
