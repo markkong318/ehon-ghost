@@ -24,52 +24,44 @@ export class VoicevoxSynthesizer {
     this.outputPath = options.outputPath;
   }
 
-  async synthesize(text: string, filename: string): Promise<string[]> {
-    const texts = text.split('。');
+  async synthesize(text: string, filename: string): Promise<void> {
     const generatedFiles: string[] = [];
 
-    for (let i = 0; i < texts.length; i++) {
-      const currentText = texts[i];
+    try {
+      const audioQueryResponse = await axios.post(
+        `http://${this.hostname}:50021/audio_query`,
+        null,
+        {
+          params: { text, speaker: this.speakerId },
+        }
+      );
 
-      if (currentText === '') continue;
+      audioQueryResponse.data.speedScale = 0.7;
 
-      try {
-        const audioQueryResponse = await axios.post(
-          `http://${this.hostname}:50021/audio_query`,
-          null,
-          {
-            params: { text: currentText, speaker: this.speakerId },
-          }
-        );
+      const synthesisResponse = await axios.post(
+        `http://${this.hostname}:50021/synthesis`,
+        JSON.stringify(audioQueryResponse.data),
+        {
+          params: { speaker: this.speakerId },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          responseType: 'arraybuffer',
+        }
+      );
 
-        const synthesisResponse = await axios.post(
-          `http://${this.hostname}:50021/synthesis`,
-          JSON.stringify(audioQueryResponse.data),
-          {
-            params: { speaker: this.speakerId },
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            responseType: 'arraybuffer',
-          }
-        );
+      const filePath = path.join(
+        this.outputPath,
+        `${filename}.wav`
+      );
 
-        const filePath = path.join(
-          this.outputPath,
-          `${filename}.wav`
-        );
+      fs.writeFileSync(filePath, Buffer.from(synthesisResponse.data));
+      console.log(`Generated: ${filePath}`);
 
-        fs.writeFileSync(filePath, Buffer.from(synthesisResponse.data));
-        generatedFiles.push(filePath);
-        console.log(`Generated: ${filePath}`);
-
-      } catch (error) {
-        console.error('Error during synthesis:', error);
-        throw error; // Re-throw the error to be handled by the caller
-      }
+    } catch (error) {
+      console.error('Error during synthesis:', error);
+      throw error;
     }
-
-    return generatedFiles;
   }
 }
 

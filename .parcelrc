@@ -3,6 +3,6 @@
   "resolvers": ["@parcel/resolver-glob", "..."],
   "reporters":  ["...", "parcel-reporter-static-files-copy"],
   "transformers": {
-      "*.{au,wav,mp3}": ["@parcel/transformer-raw"]
+      "*.{au,wav,mp3,png,jpg}": ["@parcel/transformer-raw"]
   }
 }

@@ -7,7 +7,7 @@
     "start": "npm run clean && parcel src/index.html",
     "build": "npm run clean && parcel build src/index.html --public-url ./",
     "build_serve": "npm run build && http-server ./dist",
-    "build:voice": "node pipeline/voicevox-gen/index.ts src/assets/data/game.json localhost 50021 13",
+    "build:voice": "node --experimental-strip-types pipeline/voicevox-gen/index.ts src/assets/data/game.json --hostname localhost --port 50021 --speaker 13",
     "clean": "rimraf ./dist ./.cache ./.parcel-cache",
     "deploy": "gh-pages -d dist"
   },
