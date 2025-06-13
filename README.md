@@ -1,6 +1,6 @@
-# ehon-player-v3
+# ehon-ghost
 
-It is an engine to build an ehon by config json file. The ehon supports showing and reading text by predefined asset
+It is an engine to build an ehon ghost by config json file. The ehon supports showing and reading text by predefined asset
 
 Ehon player which is forked from `parcel-pixijs-quickstarter` and apply MVC
 
@@ -23,9 +23,18 @@ npm run start
 ```
 go to [http://localhost:1234](http://localhost:1234) in your browser. Done.
 
-DEMO: [https://markkong318.github.io/ehon-player-v3/](https://markkong318.github.io/ehon-player-v3/)
+DEMO: [https://markkong318.github.io/ehon-ghost/](https://markkong318.github.io/ehon-ghost/)
+
+### Build
+
+```bash
+# Build voice files from game.json, need VOICEVOX opened (Node.js 23)
+npm run build_voice
+```
 
 # Asset
-image from イラストや
+images are converted by https://www.photo-kako.com/horror/
 
 voice from VOICEVOX
+
+story is from chatGPT
