@@ -12,6 +12,7 @@ export class ArticleView extends View {
   private sentenceViews: SentenceView[] = [];
 
   private targetWidth: number;
+  private padding: number;
 
   constructor(articleModel: ArticleModel) {
     super();
@@ -23,6 +24,7 @@ export class ArticleView extends View {
 
     const width = this.targetWidth;
     const interval = 10;
+    const padding = 40;
 
     let y = 0;
 
@@ -41,8 +43,8 @@ export class ArticleView extends View {
         continue;
       }
 
-      view.setTargetWidth(width);
-      view.x = 0;
+      view.setTargetWidth(width - padding * 2);
+      view.x = padding;
       view.y = y;
 
       view.init();

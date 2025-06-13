@@ -12,7 +12,7 @@
         "article": {
           "paragraphs": [
             {
-              "text": "夜、巨大な柱が空を覆う階段の前にいた。闇に溶け込む階段を照らすのは、無機質な照明のみ。異世界への入口のようだ",
+              "text": "夜、巨大な柱が空を覆う階段の前にいた。闇に溶け込む階段を照らすのは、無機質な照明のみ。異世界への入口のようだ。",
               "voice": "voice_1_1"
             },
             {
@@ -29,7 +29,7 @@
               "voice": "voice_2_1"
             },
             {
-              "illustration": "illustration1"
+              "illustration": "illustration2"
             }
           ]
         }
@@ -46,7 +46,11 @@
               "voice": "voice_3_2"
             },
             {
-              "illustration": "illustration1"
+              "illustration": "illustration3"
+            },
+            {
+              "text": "「誰…？」",
+              "voice": "voice_4_1"
             }
           ]
         }
@@ -54,10 +58,7 @@
       {
         "article": {
           "paragraphs": [
-            {
-              "text": "「誰…？」",
-              "voice": "voice_4_1"
-            },
+
             {
               "text": "声にならない叫び。返事はなく、闇が深まる。",
               "voice": "voice_4_2"

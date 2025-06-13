@@ -70,7 +70,7 @@ export namespace GsapUtil {
   }
 
   export function toFadeIn(tl: gsap.core.Timeline, object: DisplayObject) {
-    tl.to(object, { alpha: 1, duration: 1 });
+    tl.to(object, { alpha: 1, duration: 1.5 });
   }
 
   export function toFadeOut(tl: gsap.core.Timeline, object: DisplayObject) {

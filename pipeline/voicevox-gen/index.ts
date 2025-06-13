@@ -36,7 +36,7 @@ export class VoicevoxSynthesizer {
         }
       );
 
-      audioQueryResponse.data.speedScale = 0.7;
+      audioQueryResponse.data.speedScale = 0.85;
 
       const synthesisResponse = await axios.post(
         `http://${this.hostname}:50021/synthesis`,
